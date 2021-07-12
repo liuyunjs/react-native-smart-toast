@@ -1,6 +1,7 @@
 import React from 'react';
 import { getUpdater } from 'react-native-portal-view';
-import { timeout } from '@liuyunjs/timer';
+import { modalZIndex } from 'react-native-smart-modal/lib/modalZIndex';
+import { modalify } from 'react-native-smart-modal/lib/modalify';
 import { AnimatePresence } from 'rmotion';
 import { ToastView } from './ToastView';
 import { options } from './options';
@@ -20,42 +21,49 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-let toastKey: string | null = null;
-const toastTimer = timeout();
+const toast: { current?: string } = {
+  current: undefined,
+};
 
 const updater = getUpdater('toast');
 updater.setContainer(AnimatePresence);
 
-const hide = () => {
-  if (!toastKey) return;
-  updater.remove(toastKey);
-  toastKey = null;
+const ModalToast = modalify(ToastView);
+
+export const Toast = (props: React.ComponentProps<typeof ModalToast>) =>
+  // @ts-ignore
+  React.createElement(ModalToast, props);
+
+Toast.hide = () => {
+  if (!toast.current) return;
+  updater.remove(toast.current);
+  toast.current = undefined;
 };
 
-const custom = (
+const StaticToast = modalZIndex(ToastView);
+Toast.custom = (
   icon: React.ReactElement | React.ComponentType<any> | null,
   content?: string,
-  duration: number = 2000,
+  duration?: number,
   overlay = false,
   onClose?: () => void,
 ) => {
-  toastTimer.clear();
   const element = (
-    <ToastView
+    <StaticToast
       content={content}
       icon={icon}
       onClose={onClose}
       overlay={overlay}
+      duration={duration}
+      onRequestClose={Toast.hide}
     />
   );
 
-  if (!toastKey) {
-    toastKey = updater.add(element);
+  if (!toast.current) {
+    toast.current = updater.add(element);
   } else {
-    updater.update(toastKey, element);
+    updater.update(toast.current, element);
   }
-
-  toastTimer.set(hide, duration);
 };
 
 const creator =
@@ -66,14 +74,10 @@ const creator =
     overlay = false,
     onClose?: () => void,
   ) =>
-    custom(icon, content, duration, overlay, onClose);
+    Toast.custom(icon, content, duration, overlay, onClose);
 
-export const Toast = {
-  custom,
-  success: creator(icons.success),
-  warn: creator(icons.warn),
-  fail: creator(icons.fail),
-  loading: creator(icons.loading),
-  info: creator(null),
-  hide,
-};
+Toast.success = creator(icons.success);
+Toast.warn = creator(icons.warn);
+Toast.fail = creator(icons.fail);
+Toast.loading = creator(icons.loading);
+Toast.info = creator(null);

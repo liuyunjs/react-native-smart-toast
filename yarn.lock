@@ -5471,10 +5471,10 @@ react-native-codegen@^0.0.6:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
-react-native-portal-view@^1.0.1-beta1:
-  version "1.0.1-beta1"
-  resolved "https://registry.yarnpkg.com/react-native-portal-view/-/react-native-portal-view-1.0.1-beta1.tgz#6454e11c281e1d9f02fb493d25bc707b983c06d8"
-  integrity sha512-29gte55/oBGbYzZ0IG9N+9aA94flNIr1vnGh+qgsylhb+ga0P+WS4uUFgDFw6Bl3QVglNNETE2O8ZGIxCzauFA==
+react-native-portal-view@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-portal-view/-/react-native-portal-view-1.0.3.tgz#d731bbb86c5050b5b653185d6ad5793c419b32a7"
+  integrity sha512-DEUBmues1/gtdgly+Vi6C7wXYOamHN+KWDL3Erd4mPIf5lMSqJVmKEVsNC58Oxw6GoJP6lytDpmwproaPpoJmQ==
 
 react-native-reanimated@1.13.3:
   version "1.13.3"
@@ -5483,13 +5483,13 @@ react-native-reanimated@1.13.3:
   dependencies:
     fbjs "^1.0.0"
 
-react-native-smart-modal@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-smart-modal/-/react-native-smart-modal-1.0.1.tgz#35cb41c0c1c4aeb23ee024096219c22f0bcfe74b"
-  integrity sha512-KcIoNWF7QxdlvBCA+5GDxSU39dVfFXzYYleXCt1lZsV9rEIMtEka0NZvWu4Sfcr3z0qfMrgDztLttHtmkQO8fg==
+react-native-smart-modal@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-smart-modal/-/react-native-smart-modal-1.0.3.tgz#c676a084c5eccb353fdaf54530a1e1caaa887a09"
+  integrity sha512-uMuhYeY9J1riPoV4XRsunHQ6HjbUXcg5/cf8wbmRvg7ORJt6IxHoW5hMrgiMbygiCb5dqcd2DXVSaxn2bscw6g==
   dependencies:
     "@liuyunjs/hooks" "^1.1.0-beta2"
-    react-native-portal-view "^1.0.1-beta1"
+    react-native-portal-view "^1.0.3"
     rmotion "^0.0.4"
 
 react-native-svg@^12.1.1:

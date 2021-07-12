@@ -1,6 +1,6 @@
 {
-  "name": "rtoast",
-  "version": "0.0.1",
+  "name": "rn-smart-toast",
+  "version": "0.0.2",
   "private": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -21,8 +21,8 @@
   "dependencies": {
     "@liuyunjs/timer": "^1.0.0-beta3",
     "@liuyunjs/utils": "^1.0.0",
-    "react-native-portal-view": "^1.0.1-beta1",
-    "react-native-smart-modal": "^1.0.1",
+    "react-native-portal-view": "^1.0.3",
+    "react-native-smart-modal": "^1.0.3",
     "rmotion": "^0.0.4"
   },
   "peerDependencies": {

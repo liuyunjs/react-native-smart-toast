@@ -3,13 +3,26 @@ import { SafeAreaView, Text } from 'react-native';
 import { Toast } from './library';
 
 export default function App() {
+  const [visible, setVisible] = React.useState(false);
+
+  // console.log(111, visible);
+
   return (
     <>
       <SafeAreaView>
+        <Toast
+          onWillChange={setVisible}
+          visible={visible}
+          content="modal toast"
+          overlay={false}
+        />
+        <Text style={{ fontSize: 20 }} onPress={() => setVisible(!visible)}>
+          modal toast
+        </Text>
         <Text
           style={{ fontSize: 20 }}
           onPress={() => {
-            Toast.info('toast info');
+            Toast.info('toast info', 200000);
           }}>
           toast info
         </Text>
