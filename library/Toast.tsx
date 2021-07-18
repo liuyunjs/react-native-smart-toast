@@ -32,6 +32,7 @@ export const custom = (
     children: element,
     onRequestClose: hide,
     mask,
+    z: 2000,
     darkMaskBackgroundColor: options.darkMaskBackgroundColor,
     maskBackgroundColor: options.maskBackgroundColor,
     maskCloseable: options.maskClosable,
