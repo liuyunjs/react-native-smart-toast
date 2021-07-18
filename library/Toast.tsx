@@ -1,83 +1,83 @@
 import React from 'react';
-import { getUpdater } from 'react-native-portal-view';
-import { modalZIndex } from 'react-native-smart-modal/lib/modalZIndex';
-import { modalify } from 'react-native-smart-modal/lib/modalify';
-import { AnimatePresence } from 'rmotion';
-import { ToastView } from './ToastView';
-import { options } from './options';
+import { Modal, ModalBaseWithOverlayProps } from 'react-native-smart-modal';
+import { timeout } from '@liuyunjs/timer/lib/timeout';
+import { ToastInternal } from './ToastInternal';
+import { options, Options } from './options';
+import { IconProps } from './icons';
 
-const { icons } = options;
+let toastKey: string | null = null;
+const timer = timeout();
 
-if (process.env.NODE_ENV !== 'production') {
-  const pkg = require('../package.json');
-  if (!icons)
-    throw new Error(
-      `如果你不需要自定义图标，请在入口文件 index.js 开始处添加 import "${pkg.name}/dist/icons"`,
-    );
+const namespace = 'Toast';
 
-  ['loading', 'success', 'fail', 'warn'].forEach((key) => {
-    // @ts-ignore
-    if (icons[key] === undefined) throw new Error(`缺少对应的图标：${key}`);
-  });
-}
-
-const toast: { current?: string } = {
-  current: undefined,
+export const hide = () => {
+  if (!toastKey) return;
+  Modal.remove(namespace, toastKey);
+  toastKey = null;
 };
 
-const updater = getUpdater('toast');
-updater.setContainer(AnimatePresence);
-
-const ModalToast = modalify(ToastView);
-
-export const Toast = (props: React.ComponentProps<typeof ModalToast>) =>
-  // @ts-ignore
-  React.createElement(ModalToast, props);
-
-Toast.hide = () => {
-  if (!toast.current) return;
-  updater.remove(toast.current);
-  toast.current = undefined;
-};
-
-const StaticToast = modalZIndex(ToastView);
-Toast.custom = (
-  icon: React.ReactElement | React.ComponentType<any> | null,
+export const custom = (
+  icon: React.ReactElement<IconProps> | React.ComponentType<IconProps> | null,
   content?: string,
-  duration?: number,
-  overlay = false,
+  duration = options.showDuration,
+  mask = options.showMask,
   onClose?: () => void,
 ) => {
+  timer.clear();
   const element = (
-    <StaticToast
-      content={content}
-      icon={icon}
-      onClose={onClose}
-      overlay={overlay}
-      duration={duration}
-      onRequestClose={Toast.hide}
-    />
+    <ToastInternal content={content} icon={icon} onClose={onClose} />
   );
 
-  if (!toast.current) {
-    toast.current = updater.add(element);
+  const props: ModalBaseWithOverlayProps = {
+    children: element,
+    onRequestClose: hide,
+    mask,
+    darkMaskBackgroundColor: options.darkMaskBackgroundColor,
+    maskBackgroundColor: options.maskBackgroundColor,
+    maskCloseable: options.maskClosable,
+    verticalLayout: 'center',
+    horizontalLayout: 'center',
+    animation: options.animation,
+    animationConf: options.animationConf,
+  };
+
+  if (!toastKey) {
+    toastKey = Modal.add(namespace, props);
   } else {
-    updater.update(toast.current, element);
+    Modal.update(namespace, toastKey, props);
   }
+
+  timer.set(hide, duration);
 };
 
 const creator =
-  (icon: React.ReactElement | React.ComponentType<any> | null) =>
+  (iconKey: keyof Options['icons'] | null) =>
   (
     content?: string,
-    duration: number = 2000,
-    overlay = false,
+    duration?: number,
+    overlay?: boolean,
     onClose?: () => void,
   ) =>
-    Toast.custom(icon, content, duration, overlay, onClose);
+    custom(
+      iconKey && options.icons[iconKey],
+      content,
+      duration,
+      overlay,
+      onClose,
+    );
 
-Toast.success = creator(icons.success);
-Toast.warn = creator(icons.warn);
-Toast.fail = creator(icons.fail);
-Toast.loading = creator(icons.loading);
-Toast.info = creator(null);
+export const success = creator('success');
+export const warn = creator('warn');
+export const fail = creator('fail');
+export const loading = creator('loading');
+export const info = creator(null);
+
+export const Toast = {
+  success,
+  warn,
+  fail,
+  loading,
+  info,
+  hide,
+  custom,
+};

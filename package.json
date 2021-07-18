@@ -1,15 +1,17 @@
 {
   "name": "rn-smart-toast",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/main.js",
+  "types": "./dist/main.d.ts",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "build": "rimraf ./dist; tsc",
+    "prepublishOnly": "yarn build"
   },
   "bugs": {
     "url": "https://github.com/liuyunjs/react-native-smart-toast/issues"
@@ -22,8 +24,9 @@
     "@liuyunjs/timer": "^1.0.0-beta3",
     "@liuyunjs/utils": "^1.0.0",
     "react-native-portal-view": "^1.0.3",
-    "react-native-smart-modal": "^1.0.3",
-    "rmotion": "^0.0.4"
+    "react-native-smart-modal": "^1.0.7",
+    "rmotion": "^0.0.4",
+    "rn-darkly": "^0.0.6"
   },
   "peerDependencies": {
     "react": "17.0.1",
