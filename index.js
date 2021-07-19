@@ -2,7 +2,7 @@
  * @format
  */
 
-import 'react-native-portal-view';
+import 'react-native-smart-modal';
 import { AppRegistry } from 'react-native';
 import { name as appName } from './app.json';
 import './library/icons';

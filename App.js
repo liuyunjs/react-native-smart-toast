@@ -1,6 +1,14 @@
 import React from 'react';
 import { SafeAreaView, Text } from 'react-native';
-import { Toast } from './library/main';
+import { Fail, Loading } from './library/icons';
+import { Toast, configure } from './library/main';
+
+configure({
+  icons: {
+    fail: Fail,
+    loading: Loading,
+  },
+});
 
 export default function App() {
   return (

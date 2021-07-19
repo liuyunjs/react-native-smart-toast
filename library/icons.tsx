@@ -2,7 +2,6 @@ import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 import { ActivityIndicator, View } from 'react-native';
 import { darkly } from 'rn-darkly';
-import { configure } from './configure';
 
 export type IconProps = {
   size: number;
@@ -69,13 +68,4 @@ export const Fail = internalDarkly(function Fail({
       </Svg>
     </View>
   );
-});
-
-configure({
-  icons: {
-    loading: Loading,
-    fail: Fail,
-    success: Success,
-    warn: Warn,
-  },
 });
