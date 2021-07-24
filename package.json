@@ -1,6 +1,6 @@
 {
   "name": "rn-smart-toast",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": false,
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
@@ -23,7 +23,7 @@
   "dependencies": {
     "@liuyunjs/timer": "^1.0.0-beta3",
     "@liuyunjs/utils": "^1.0.0",
-    "react-native-smart-modal": "^1.0.8",
+    "react-native-smart-modal": "^1.0.10",
     "rmotion": "^0.0.4",
     "rn-darkly": "^0.0.6"
   },

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Modal, ModalBaseWithOverlayProps } from 'react-native-smart-modal';
+import { Modal } from 'react-native-smart-modal';
+import { ModalInternalProps } from 'react-native-smart-modal/dist/types';
 import { timeout } from '@liuyunjs/timer/lib/timeout';
 import { ToastInternal } from './ToastInternal';
 import { options, Options } from './options';
@@ -8,7 +9,7 @@ import { IconProps } from './icons';
 let toastKey: string | null = null;
 const timer = timeout();
 
-const namespace = 'Toast';
+const namespace = 'Toast' + Math.random().toString(32);
 
 export const hide = () => {
   if (!toastKey) return;
@@ -28,11 +29,11 @@ export const custom = (
     <ToastInternal content={content} icon={icon} onClose={onClose} />
   );
 
-  const props: ModalBaseWithOverlayProps = {
+  const props: ModalInternalProps = {
     children: element,
     onRequestClose: hide,
     mask,
-    z: 2000,
+    containerStyle: { zIndex: 2000 },
     darkMaskBackgroundColor: options.darkMaskBackgroundColor,
     maskBackgroundColor: options.maskBackgroundColor,
     maskCloseable: options.maskClosable,
