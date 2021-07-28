@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { DarklyView, DarklyText } from 'rn-darkly';
+import { isFunction } from '@liuyunjs/utils/lib/isFunction';
 import { IconProps } from './icons';
 import { options } from './options';
 
@@ -15,7 +16,12 @@ export const ToastInternal: React.FC<ToastProps> = ({
   icon,
   onClose,
 }) => {
-  React.useEffect(() => () => onClose?.(), [onClose]);
+  React.useEffect(
+    () => () => {
+      isFunction(onClose) && onClose();
+    },
+    [onClose],
+  );
 
   const renderIcon = () => {
     if (!icon) return null;

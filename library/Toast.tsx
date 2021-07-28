@@ -49,7 +49,7 @@ export const custom = (
     Modal.update(namespace, toastKey, props);
   }
 
-  timer.set(hide, duration);
+  timer.set(hide, duration * 1000);
 };
 
 const creator =

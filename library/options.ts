@@ -67,7 +67,7 @@ export const options: Options = {
   iconSize: 36,
   iconSizeOnlyIcon: 50,
 
-  showDuration: 2000,
+  showDuration: 2,
   showMask: false,
   maskClosable: false,
 
