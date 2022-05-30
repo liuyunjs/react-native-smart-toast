@@ -28,7 +28,7 @@ export const ToastInternal: React.FC<ToastProps> = ({
     const props = {
       size: content ? options.iconSize : options.iconSizeOnlyIcon,
       tintColor: options.tintColor,
-      darkTintColor: options.darkTintColor,
+      dark_tintColor: options.dark_tintColor,
     };
     return React.isValidElement(icon)
       ? React.cloneElement(icon, props)
@@ -38,7 +38,7 @@ export const ToastInternal: React.FC<ToastProps> = ({
   return (
     <View style={{ maxWidth: options.maxWidth, maxHeight: options.maxHeight }}>
       <DarklyView
-        darkStyle={{ backgroundColor: options.darkBackgroundColor }}
+        dark_style={{ backgroundColor: options.dark_backgroundColor }}
         style={{
           alignItems: 'center',
           backgroundColor: options.backgroundColor,
@@ -55,7 +55,7 @@ export const ToastInternal: React.FC<ToastProps> = ({
         {renderIcon()}
         {!!content && (
           <DarklyText
-            darkStyle={{ color: options.darkTintColor }}
+            dark_style={{ color: options.dark_tintColor }}
             style={{
               textAlign: 'center',
               lineHeight: options.textLineHeight,

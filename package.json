@@ -1,11 +1,11 @@
 {
   "name": "rn-smart-toast",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
   "scripts": {
-    "build": "rimraf ./dist; tsc",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "build": "rimraf ./dist; rollup -c rollup.config.js"
   },
   "bugs": {
     "url": "https://github.com/liuyunjs/react-native-smart-toast/issues"
@@ -15,11 +15,10 @@
     "url": "https://github.com/liuyunjs/react-native-smart-toast"
   },
   "dependencies": {
-    "@liuyunjs/timer": "^1.0.0-beta3",
-    "@liuyunjs/utils": "^1.0.0",
-    "react-native-smart-modal": "^1.0.11",
-    "rmotion": "^1.0.0",
-    "rn-darkly": "^1.0.3"
+    "@liuyunjs/utils": "^1",
+    "react-native-smart-modal": "^2",
+    "rmotion": "^2",
+    "rn-darkly": "^2"
   },
   "peerDependencies": {
     "react": "17.0.1",
@@ -44,6 +43,8 @@
     "react-native-reanimated": "1.13.3",
     "react-native-svg": "^12.1.1",
     "react-test-renderer": "17.0.1",
-    "typescript": "^3.8.3"
+    "rollup": "^2.74.1",
+    "rollup-plugin-typescript2": "^0.31.2",
+    "typescript": "^4.7.2"
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { AnimationPresupposition, OneOfAnimConf } from 'rmotion';
-import { animations } from 'react-native-smart-modal';
+import { OneOfAnimConf } from 'rmotion';
+import { animations, AnimationPresupposition } from 'react-native-smart-modal';
 import { Fail, Warn, Success, Loading, IconProps } from './icons';
 
 export type Options = {
@@ -11,9 +11,9 @@ export type Options = {
     fail: React.ReactElement<IconProps> | React.ComponentType<IconProps>;
   };
   backgroundColor: string;
-  darkBackgroundColor: string;
+  dark_backgroundColor: string;
   tintColor: string;
-  darkTintColor: string;
+  dark_tintColor: string;
   borderRadius: number;
   contentInterval: number;
   paddingHorizontalWithIcon: number;
@@ -38,7 +38,7 @@ export type Options = {
   animationConf: OneOfAnimConf;
 
   maskBackgroundColor: string;
-  darkMaskBackgroundColor: string;
+  dark_maskBackgroundColor: string;
 };
 
 export const options: Options = {
@@ -49,9 +49,9 @@ export const options: Options = {
     fail: Fail,
   },
   backgroundColor: 'rgba(0, 0, 0, .8)',
-  darkBackgroundColor: 'rgba(49,45,45,0.8)',
+  dark_backgroundColor: 'rgba(49,45,45,0.8)',
   tintColor: '#fff',
-  darkTintColor: '#eee',
+  dark_tintColor: '#eee',
   borderRadius: 4,
   contentInterval: 6,
   paddingHorizontalWithIcon: 15,
@@ -75,7 +75,7 @@ export const options: Options = {
   animationConf: { duration: 100 },
 
   maskBackgroundColor: 'transparent',
-  darkMaskBackgroundColor: 'transparent',
+  dark_maskBackgroundColor: 'transparent',
   maxHeight: '80%',
   maxWidth: '80%',
 };

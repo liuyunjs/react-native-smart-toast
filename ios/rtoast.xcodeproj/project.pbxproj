@@ -14,6 +14,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		932C749FBB2EE04A9DF6B4A6 /* libPods-rtoast-rtoastTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B55A20BD5C394806619DBF4B /* libPods-rtoast-rtoastTests.a */; };
 		C04E2CC75DA2E55D6A3F3B7F /* libPods-rtoast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80321714D5AE946A53BCBD0 /* libPods-rtoast.a */; };
+		DFB004902844A0F300B963F7 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB0048F2844A0F300B963F7 /* App.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,8 @@
 		B55A20BD5C394806619DBF4B /* libPods-rtoast-rtoastTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rtoast-rtoastTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B80321714D5AE946A53BCBD0 /* libPods-rtoast.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rtoast.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5616C6813192FE90BF5FB2 /* Pods-rtoast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rtoast.debug.xcconfig"; path = "Target Support Files/Pods-rtoast/Pods-rtoast.debug.xcconfig"; sourceTree = "<group>"; };
+		DFB0048E2844A0F200B963F7 /* rtoast-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rtoast-Bridging-Header.h"; sourceTree = "<group>"; };
+		DFB0048F2844A0F300B963F7 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F8DB95B699E25804A2C8C9A2 /* Pods-rtoast-rtoastTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rtoast-rtoastTests.release.xcconfig"; path = "Target Support Files/Pods-rtoast-rtoastTests/Pods-rtoast-rtoastTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +95,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				DFB0048F2844A0F300B963F7 /* App.swift */,
+				DFB0048E2844A0F200B963F7 /* rtoast-Bridging-Header.h */,
 			);
 			name = rtoast;
 			sourceTree = "<group>";
@@ -145,7 +150,6 @@
 				7A55C794A811C56F3C2D329A /* Pods-rtoast-rtoastTests.debug.xcconfig */,
 				F8DB95B699E25804A2C8C9A2 /* Pods-rtoast-rtoastTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -208,7 +212,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -411,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFB004902844A0F300B963F7 /* App.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -431,6 +436,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A55C794A811C56F3C2D329A /* Pods-rtoast-rtoastTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -458,6 +464,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F8DB95B699E25804A2C8C9A2 /* Pods-rtoast-rtoastTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = rtoastTests/Info.plist;
@@ -498,6 +505,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = rtoast;
+				SWIFT_OBJC_BRIDGING_HEADER = "rtoast-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -523,6 +531,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = rtoast;
+				SWIFT_OBJC_BRIDGING_HEADER = "rtoast-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

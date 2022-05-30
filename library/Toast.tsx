@@ -1,7 +1,6 @@
 import React from 'react';
-import { Modal } from 'react-native-smart-modal';
-import { ModalInternalProps } from 'react-native-smart-modal/dist/types';
-import { timeout } from '@liuyunjs/timer/lib/timeout';
+import { Modal, ModalInternalProps } from 'react-native-smart-modal';
+import { timeout } from '@liuyunjs/utils/lib/timer';
 import { ToastInternal } from './ToastInternal';
 import { options, Options } from './options';
 import { IconProps } from './icons';
@@ -34,7 +33,8 @@ export const custom = (
     onRequestClose: hide,
     mask,
     containerStyle: { zIndex: 2000 },
-    darkMaskBackgroundColor: options.darkMaskBackgroundColor,
+    // @ts-ignore
+    dark_maskBackgroundColor: options.dark_maskBackgroundColor,
     maskBackgroundColor: options.maskBackgroundColor,
     maskCloseable: options.maskClosable,
     verticalLayout: 'center',

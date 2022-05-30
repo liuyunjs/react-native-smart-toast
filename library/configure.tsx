@@ -37,18 +37,15 @@ const getIcon = (icon: Icon) => {
 };
 
 export const configure = (opts: ConfigureOptions) => {
-  for (let key in opts) {
-    if (!opts.hasOwnProperty(key)) continue;
+  Object.keys(opts).forEach((key) => {
     if (key === 'icons' && opts.icons) {
-      for (let i in opts.icons) {
+      Object.keys(opts.icons).forEach((k) => {
         // @ts-ignore
-        if (!opts.icons.hasOwnProperty(i) || opts.icons[i] == null) continue;
-        // @ts-ignore
-        options.icons[i] = getIcon(opts.icons[i]);
-      }
+        opts.icons[k] != null && (options.icons[k] = getIcon(opts.icons[k]));
+      });
     } else {
       // @ts-ignore
       opts[key] != null && (options[key] = opts[key]);
     }
-  }
+  });
 };
