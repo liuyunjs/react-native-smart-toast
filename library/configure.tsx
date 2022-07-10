@@ -1,9 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import { Image } from 'react-native';
 import { isNumber } from '@liuyunjs/utils/lib/isNumber';
 import { isString } from '@liuyunjs/utils/lib/isString';
 import { options, Options as O } from './options';
 import { IconProps } from './icons';
+import { injectDefaultProps } from './injectDefaultProps';
+import { Toast } from './ToastInternal';
 
 type Icon =
   | number
@@ -48,4 +50,5 @@ export const configure = (opts: ConfigureOptions) => {
       opts[key] != null && (options[key] = opts[key]);
     }
   });
+  injectDefaultProps(Toast);
 };

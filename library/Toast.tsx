@@ -1,72 +1,53 @@
-import React from 'react';
-import { Modal, ModalInternalProps } from 'react-native-smart-modal';
-import { timeout } from '@liuyunjs/utils/lib/timer';
-import { ToastInternal } from './ToastInternal';
-import { options, Options } from './options';
-import { IconProps } from './icons';
+import * as React from 'react';
+import { withModal } from 'react-native-smart-modal';
+import { Toast as ToastInternal } from './ToastInternal';
+import { Options } from './options';
+
+const ModalifyToast = withModal(ToastInternal);
+
+const { show: showInternal, hide: hideInternal } = ModalifyToast;
 
 let toastKey: string | null = null;
-const timer = timeout();
-
-const namespace = 'Toast' + Math.random().toString(32);
 
 export const hide = () => {
   if (!toastKey) return;
-  Modal.remove(namespace, toastKey);
+  hideInternal(toastKey);
   toastKey = null;
 };
 
-export const custom = (
-  icon: React.ReactElement<IconProps> | React.ComponentType<IconProps> | null,
-  content?: string,
-  duration = options.showDuration,
-  mask = options.showMask,
-  onClose?: () => void,
-) => {
-  timer.clear();
-  const element = (
-    <ToastInternal content={content} icon={icon} onClose={onClose} />
-  );
+export const show = ({
+  onRequestClose,
+  ...rest
+}: React.ComponentProps<typeof ToastInternal>) => {
+  const props = rest as any;
 
-  const props: ModalInternalProps = {
-    children: element,
-    onRequestClose: hide,
-    mask,
-    containerStyle: { zIndex: 2000 },
-    // @ts-ignore
-    dark_maskBackgroundColor: options.dark_maskBackgroundColor,
-    maskBackgroundColor: options.maskBackgroundColor,
-    maskCloseable: options.maskClosable,
-    verticalLayout: 'center',
-    horizontalLayout: 'center',
-    animation: options.animation,
-    animationConf: options.animationConf,
+  props.onRequestClose = () => {
+    onRequestClose?.();
+    hide();
   };
 
-  if (!toastKey) {
-    toastKey = Modal.add(namespace, props);
+  if (toastKey) {
+    ModalifyToast.update(toastKey, props);
   } else {
-    Modal.update(namespace, toastKey, props);
+    toastKey = showInternal(props);
   }
-
-  timer.set(hide, duration * 1000);
 };
 
 const creator =
-  (iconKey: keyof Options['icons'] | null) =>
+  (icon: keyof Options['icons'] | null) =>
   (
     content?: string,
     duration?: number,
     overlay?: boolean,
     onClose?: () => void,
   ) =>
-    custom(
-      iconKey && options.icons[iconKey],
+    show({
+      icon,
       content,
-      duration,
-      overlay,
-      onClose,
-    );
+      showDuration: duration,
+      mask: overlay,
+      onRequestClose: onClose,
+    });
 
 export const success = creator('success');
 export const warn = creator('warn');
@@ -74,12 +55,14 @@ export const fail = creator('fail');
 export const loading = creator('loading');
 export const info = creator(null);
 
-export const Toast = {
+export const Toast = Object.assign(React.memo(ModalifyToast), {
   success,
   warn,
   fail,
   loading,
   info,
   hide,
-  custom,
-};
+  show,
+});
+
+export default Toast;

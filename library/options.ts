@@ -1,7 +1,7 @@
-import React from 'react';
-import { OneOfAnimConf } from 'rmotion';
-import { animations, AnimationPresupposition } from 'react-native-smart-modal';
+import * as React from 'react';
 import { Fail, Warn, Success, Loading, IconProps } from './icons';
+import { FadeIn, FadeOut } from 'react-native-reanimated';
+import { ModalInternalProps } from 'react-native-smart-modal';
 
 export type Options = {
   icons: {
@@ -34,8 +34,11 @@ export type Options = {
   showMask: boolean;
   maskClosable: boolean;
   showDuration: number;
-  animation: AnimationPresupposition;
-  animationConf: OneOfAnimConf;
+
+  animationIn: ModalInternalProps['animationIn'];
+  animationOut: ModalInternalProps['animationOut'];
+  maskAnimationIn: ModalInternalProps['maskAnimationIn'];
+  maskAnimationOut: ModalInternalProps['maskAnimationOut'];
 
   maskBackgroundColor: string;
   dark_maskBackgroundColor: string;
@@ -71,8 +74,10 @@ export const options: Options = {
   showMask: false,
   maskClosable: false,
 
-  animation: animations.fade,
-  animationConf: { duration: 100 },
+  animationIn: FadeIn.duration(100),
+  animationOut: FadeOut.duration(100),
+  maskAnimationIn: FadeIn.duration(100),
+  maskAnimationOut: FadeOut.duration(100),
 
   maskBackgroundColor: 'transparent',
   dark_maskBackgroundColor: 'transparent',

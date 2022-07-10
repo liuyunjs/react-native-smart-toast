@@ -1,21 +1,22 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { DarklyText } from 'rn-darkly';
-import { Fail, Loading } from './library/icons';
-import { Toast, configure } from './library/main';
+import { configure, Toast } from './library/main';
 
 (DarklyText.defaultProps || (DarklyText.defaultProps = {})).dark_style = {
   color: '#ccc',
 };
 
 configure({
-  icons: {
-    fail: Fail,
-    loading: Loading,
-  },
+  maskBackgroundColor: 'rgba(0, 0, 0, .05)',
+  dark_maskBackgroundColor: 'rgba(255, 255, 255, .05)',
+  showMask: true,
+  maskClosable: false,
 });
 
 export default function App() {
+  const [visible, setVisible] = React.useState(false);
+
   return (
     <>
       <SafeAreaView>
@@ -82,6 +83,14 @@ export default function App() {
           }}>
           toast loading2
         </DarklyText>
+        <DarklyText
+          style={{ fontSize: 20 }}
+          onPress={() => {
+            setVisible(!visible);
+          }}>
+          toast loading3
+        </DarklyText>
+        <Toast visible={visible} onChange={setVisible} icon="loading" />
       </SafeAreaView>
     </>
   );
